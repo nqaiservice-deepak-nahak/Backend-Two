@@ -4,7 +4,7 @@ replicaCount: $(BACKEND_TWO_REPLICA_COUNT)
 
 image:
   repository: "$(BACKEND_TWO_IMAGE_URI)"
-  tag: "$(Build.BuildId)"
+  tag: "$(IMAGE_TAG)"
   pullPolicy: Always
 
 service:
