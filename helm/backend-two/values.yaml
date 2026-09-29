@@ -1,0 +1,22 @@
+namespace: $(K8S_NAMESPACE)
+
+replicaCount: $(BACKEND_TWO_REPLICA_COUNT)
+
+image:
+  repository: "$(BACKEND_TWO_IMAGE_URI)"
+  tag: "$(Build.BuildId)"
+  pullPolicy: Always
+
+service:
+  name: backend-two-service
+  type: ClusterIP
+  port: 80
+  targetPort: $(BACKEND_TWO_PORT)
+
+resources:
+  requests:
+    cpu: "$(BACKEND_TWO_CPU)"
+    memory: "$(BACKEND_TWO_MEMORY)"
+  limits:
+    cpu: "$(BACKEND_TWO_CPU)"
+    memory: "$(BACKEND_TWO_MEMORY)"
