@@ -113,7 +113,7 @@ jobs:
       - name: Setup kubelogin
         uses: azure/use-kubelogin@v1
         with: 
-          kubelogin-version: 'latest'
+          kubelogin-version: 'v0.2.20'
         
       - name: Set AKS context
         uses: azure/aks-set-context@v5
