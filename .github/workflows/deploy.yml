@@ -110,14 +110,22 @@ jobs:
       # ------------------------------------------------
       # 9. Connect GitHub runner to AKS
       # ------------------------------------------------
-      - name: Get AKS credentials
-        shell: bash
+      - name: Setup kubelogin
+        uses: azure/use-kubelogin@v1
+        with: 
+          kubelogin-version: 'latest'
+        
+      - name: Set AKS context
+        uses: azure/aks-set-context@v5
+        with:
+          resource-group: ${{ vars.RESOURCE_GROUP }}
+          cluster-name: ${{ vars.AKS_CLUSTER_NAME }}
+          admin: 'false'
+          use-kubelogin: 'true'
+
+      - name: Test AKS connection
         run: |
-          az aks get-credentials \
-            --resource-group "${RESOURCE_GROUP}" \
-            --name "${AKS_CLUSTER_NAME}" \
-            --admin \
-            --overwrite-existing
+          kubectl get nodes
 
 
       # ------------------------------------------------
